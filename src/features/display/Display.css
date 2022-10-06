@@ -1,0 +1,28 @@
+
+.display-loading-screen, .display-screen {
+  width: 350px;
+  height: 200px;
+  margin: 10px;
+  font-family: 'Roboto Mono', Courier, monospace;
+}
+
+.display-screen {
+  background: rgb(255, 244, 224);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: black;
+  /* font-size: small; */
+}
+
+.display-screen.dark-mode {
+  background: black;
+  color: lightcoral;
+}
+
+
+.display-loading-screen {
+  background-color: black;
+  color: orangered;
+}

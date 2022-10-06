@@ -1,0 +1,10 @@
+.rotary-knob {
+  background: linear-gradient(170deg, #545454, rgb(151, 151, 151) 70%);
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+}

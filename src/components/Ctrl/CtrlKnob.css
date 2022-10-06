@@ -1,0 +1,6 @@
+.ctrl-knob {
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(150deg, #666666, silver 70%);
+  margin: 10px;
+}
