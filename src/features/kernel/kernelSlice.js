@@ -11,7 +11,8 @@ export const modes = {
 
 export const displayModes = {
   PROJ: 1,
-  LOADPROJ: 2
+  LOADPROJ: 2,
+  EDIT_TRACK: 3,
 };
 
 export const kernelSlice = createSlice({

@@ -36,12 +36,16 @@ export const sequencerSlice = createSlice({
         state.step = state.step >= 15 ? 0 : state.step + 1;
       } else if (state.steps[action.payload.id] !== undefined) {
         const nextStep = state.steps[action.payload.id] + 1;
-        console.log('here');
+        // console.log('here');
         state.steps[action.payload.id] = (action.payload.max
-          && nextStep >= action.payload.max)
+          && nextStep >= (action.payload.max - 1))
           ? 0
           : nextStep;
       }
+    },
+    resetSteps: (state) => {
+      state.step = 0;
+      state.steps = state.steps.map(() => 0);
     }
   },
 });
@@ -51,7 +55,8 @@ export const {
   initSequence,
   toggleStep,
   nextStep,
-  initTrackSteps
+  initTrackSteps,
+  resetSteps
 } = sequencerSlice.actions;
 
 export default sequencerSlice.reducer;

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import PadButton from '../../components/Pads/PadButton';
 import PadsContainer from '../../components/Pads/PadsContainer';
-import { modes } from '../kernel/kernelSlice';
+import { displayModes, modes, setDisplayMode } from '../kernel/kernelSlice';
 import { setSelectedTrack } from '../project/projectSlice';
 
 const padKeys = [];
@@ -12,7 +12,7 @@ for (let i = 0; i < 16; i++) {
 
 function Pads() {
   const { selectedTrackId } = useSelector((state) => state.project);
-  const { mode } = useSelector((state) => state.kernel);
+  const { mode, displayMode } = useSelector((state) => state.kernel);
   const dispatch = useDispatch();
 
   return (
@@ -20,10 +20,12 @@ function Pads() {
       {padKeys.map((_v, idx) => (
         <PadButton
           onClick={(e) => {
-            if (selectedTrackId !== idx
-              && (mode === modes.EDIT || e.shiftKey)
-            ) {
-              dispatch(setSelectedTrack(idx));
+            if ((mode === modes.EDIT || e.shiftKey)) {
+              if (selectedTrackId !== idx) {
+                dispatch(setSelectedTrack(idx));
+              } else if (displayMode !== displayModes.EDIT_TRACK) {
+                dispatch(setDisplayMode(displayModes.EDIT_TRACK));
+              }
             } else if (mode === modes.PERF) {
               console.log('trigger drum pad');
             }

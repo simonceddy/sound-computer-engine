@@ -1,10 +1,12 @@
 import { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DisplayContainer from '../../components/Display/DisplayContainer';
 import './Display.css';
 import { displayModes, modes } from '../kernel/kernelSlice';
 import TrackDisplayRow from '../../components/Display/TrackDisplayRow';
 import LoadProject from '../loadProject';
+import { setSelectedTrack } from '../project/projectSlice';
+import EditTrack from '../editTrack/EditTrack';
 
 function Display() {
   const ref = useRef(null);
@@ -15,7 +17,7 @@ function Display() {
   } = useSelector((state) => state.project);
   const { loadedSequences } = useSelector((state) => state.sequencer);
   // console.log(tracks);
-
+  const dispatch = useDispatch();
   return (
     <DisplayContainer>
       {booted ? (
@@ -48,6 +50,12 @@ function Display() {
               </div>
               {tracks.map((track, idx) => (
                 <TrackDisplayRow
+                  selected={idx === selectedTrackId}
+                  onClick={() => {
+                    if (idx !== selectedTrackId) {
+                      dispatch(setSelectedTrack(idx));
+                    }
+                  }}
                   darkMode={darkMode}
                   key={`track-${idx}-info`}
                   index={idx}
@@ -59,6 +67,9 @@ function Display() {
             )}
             {displayMode === displayModes.LOADPROJ && (
             <LoadProject />
+            )}
+            {displayMode === displayModes.EDIT_TRACK && (
+              <EditTrack />
             )}
           </div>
           {}

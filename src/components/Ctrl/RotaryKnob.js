@@ -1,20 +1,22 @@
-import { forwardRef } from 'react';
+/* eslint-disable no-unused-vars */
+import { forwardRef, useState } from 'react';
+import getDeg from '../../util/getDeg';
 import './RotaryKnob.css';
-import useRotaryKnob from '../../hooks/useRotaryKnob';
 
 const RotaryKnob = forwardRef((props, ref) => {
-  const {
-    deg, onWheel
-  } = useRotaryKnob({
-    infiniteTurn: true,
-    value: props.value || 0,
-    minKnobDeg: props.minknobdeg || -130,
-    maxKnobDeg: props.maxknobdeg || 130,
-    minKnobVal: props.minknobval || 0,
-    maxKnobVal: props.maxknobval || 12,
-  }, props.onChange || null);
+  const [deg, setDeg] = useState(props.deg || 0);
+  const onWheel = (e) => {
+    const direction = e.deltaY > 0 ? 'down' : 'up';
+    const nextDeg = direction === 'up'
+      ? deg + (e.shiftKey ? (props.shiftStep || 2) : (props.step || 5))
+      : deg - (e.shiftKey ? (props.shiftStep || 2) : (props.step || 5));
+    setDeg(getDeg(nextDeg));
+    if (props.onChange) props.onChange(direction, deg, e);
+  };
+
   return (
     <div
+      onDoubleClick={props.onDoubleClick}
       onWheel={onWheel}
       role="presentation"
       style={{

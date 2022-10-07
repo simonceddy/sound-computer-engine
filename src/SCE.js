@@ -10,12 +10,13 @@ import CtrlsPanel from './features/ctrls/CtrlsPanel';
 import CtrlKnob from './components/Ctrl/CtrlKnob';
 import MicroSDSlot from './components/MicroSDSlot';
 import ClockQuickCtrl from './features/clock/ClockQuickCtrl';
-import Bootloader from './features/kernel/Bootloader';
+import Kernel from './features/kernel/Kernel';
 
 function SCE() {
+  if (!window.AudioContext) return (<div>Your browser does not support WebAudio</div>);
   return (
     <Provider store={store}>
-      <Bootloader>
+      <Kernel>
         <div className="w-full p-2 h-full dark:bg-purple-900 bg-blue-200">
           <SCEContainer>
             <div className="flex flex-row items-center justify-center">
@@ -41,7 +42,7 @@ function SCE() {
             </div>
           </SCEContainer>
         </div>
-      </Bootloader>
+      </Kernel>
     </Provider>
   );
 }

@@ -1,5 +1,6 @@
 import { toggleDarkMode } from '../display/displaySlice';
 import { displayModes, setDisplayMode } from '../kernel/kernelSlice';
+import { resetSteps } from '../sequencer/sequencerSlice';
 import EditModeButton from './EditModeButton';
 import PerfModeButton from './PerfModeButton';
 import PlayButton from './PlayButton';
@@ -47,6 +48,10 @@ const ctrlsList = [
   {
     id: 'play-button',
     Component: PlayButton
+  },
+  {
+    id: 'restart-button',
+    action: (dispatch) => dispatch(resetSteps())
   }
 ];
 

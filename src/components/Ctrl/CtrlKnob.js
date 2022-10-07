@@ -1,17 +1,18 @@
-import useRotaryKnob from '../../hooks/useRotaryKnob';
+import { useState } from 'react';
+import getDeg from '../../util/getDeg';
+// import useRotaryKnob from '../../hooks/useRotaryKnob';
 import './CtrlKnob.css';
 
 function CtrlKnob(props) {
-  const {
-    deg, onWheel
-  } = useRotaryKnob({
-    infiniteTurn: true,
-    value: props.value || 0,
-    minKnobDeg: props.minknobdeg || -130,
-    maxKnobDeg: props.maxknobdeg || 130,
-    minKnobVal: props.minknobval || 0,
-    maxKnobVal: props.maxknobval || 12,
-  }, props.onChange || null);
+  const [deg, setDeg] = useState(props.deg || 0);
+  const onWheel = (e) => {
+    const direction = e.deltaY > 0 ? 'down' : 'up';
+    const nextDeg = direction === 'up'
+      ? deg + (e.shiftKey ? 2 : 12)
+      : deg - (e.shiftKey ? 2 : 12);
+    setDeg(getDeg(nextDeg));
+    if (props.onChange) props.onChange(direction);
+  };
 
   return (
     <div

@@ -1,8 +1,13 @@
 function TrackDisplayRow({
-  index, track = {}, sequence = [], darkMode = false
+  index, track = {}, sequence = [], darkMode = false, selected, onClick
 }) {
+  // if (selected) console.log(index);
   return (
-    <div className={`flex flex-row justify-between items-center w-full border-b ${darkMode ? 'border-orange-300' : 'border-black'}`}>
+    <div
+      role="presentation"
+      onClick={onClick}
+      className={`${selected ? 'bg-blue-700 text-orange-300' : ''} flex flex-row justify-between items-center w-full border-b ${darkMode ? 'border-orange-300' : 'border-black'}`}
+    >
       <span className={`mr-1 pr-1 border-r ${darkMode ? 'border-orange-300' : 'border-black'}`}>
         {(index + 1).toLocaleString(
           'en-US',
