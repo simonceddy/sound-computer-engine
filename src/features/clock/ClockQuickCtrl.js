@@ -27,7 +27,15 @@ function ClockQuickCtrl() {
   return (
     <div className="clock-quick-ctrl-container flex flex-row justify-around items-center">
       <div className="bg-black font-digi clock-quick-ctrl-bpm text-red-400 italic text-3xl">
-        {booted ? tempo : ''}
+        {booted ? tempo.toLocaleString(
+          'en-US',
+          {
+            minimumIntegerDigits: 2,
+            maximumFractionDigits: 1,
+            minimumFractionDigits: 1,
+            useGrouping: false
+          }
+        ) : ''}
       </div>
       {}
       <RotaryKnob

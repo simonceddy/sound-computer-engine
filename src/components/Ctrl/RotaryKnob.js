@@ -5,7 +5,8 @@ import './RotaryKnob.css';
 
 const RotaryKnob = forwardRef((props, ref) => {
   const [deg, setDeg] = useState(props.deg || 0);
-  const onWheel = (e) => {
+  const turnKnob = (e) => {
+    console.log(e);
     const direction = e.deltaY > 0 ? 'down' : 'up';
     const nextDeg = direction === 'up'
       ? deg + (e.shiftKey ? (props.shiftStep || 2) : (props.step || 5))
@@ -17,11 +18,12 @@ const RotaryKnob = forwardRef((props, ref) => {
   return (
     <div
       onDoubleClick={props.onDoubleClick}
-      onWheel={onWheel}
+      onWheel={turnKnob}
       role="presentation"
       style={{
         transform: `rotate(${deg}deg)`
       }}
+      onDragStart={turnKnob}
       ref={ref}
       className="rotary-knob rounded-full"
     >

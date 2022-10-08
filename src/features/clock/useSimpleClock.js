@@ -62,11 +62,11 @@ export default function useSimpleClock(onTick) {
         runClock();
       }, 5);
       setIntervalID(interval);
-      console.log('running', intervalID);
+      // console.log('running', intervalID);
     } else {
       clearInterval(intervalID);
       setIntervalID(null);
-      console.log('stopped', intervalID);
+      // console.log('stopped', intervalID);
     }
   }, [isPlaying]);
   // const lookahead = 25.0; // How frequently to call scheduling function (in milliseconds)

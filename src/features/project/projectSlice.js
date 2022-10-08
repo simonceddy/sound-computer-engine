@@ -8,7 +8,8 @@ export const projectSlice = createSlice({
     id: preloadProjectId(),
     tempo: 120,
     tracks: preloadTracks(),
-    selectedTrackId: 0
+    selectedTrackId: 0,
+    initialProject: null
   },
   reducers: {
     setProjectTempo: (state, action) => {
@@ -28,6 +29,28 @@ export const projectSlice = createSlice({
           }
         )}`
       };
+    },
+    setTracks: (state, action) => {
+      state.tracks = action.payload;
+    },
+    setProjectId: (state, action) => {
+      state.selectedTrackId = action.payload;
+    },
+    loadProject: (state, action) => {
+      if (action.payload.id) {
+        state.id = action.payload.id;
+        state.selectedTrackId = action.payload.selectedTrackId || state.selectedTrackId;
+        state.tempo = action.payload.tempo || state.tempo;
+        state.tracks = action.payload.tracks || state.tracks;
+      }
+    },
+    updateTrack: (state, action) => {
+      if (state.tracks[action.payload.id] && action.payload.data) {
+        state.tracks[action.payload.id] = {
+          ...state.tracks[action.payload.id],
+          ...action.payload.data
+        };
+      }
     }
   },
 });
@@ -35,7 +58,11 @@ export const projectSlice = createSlice({
 export const {
   setProjectTempo,
   setSelectedTrack,
-  initTrack
+  initTrack,
+  setProjectId,
+  setTracks,
+  loadProject,
+  updateTrack
 } = projectSlice.actions;
 
 export default projectSlice.reducer;

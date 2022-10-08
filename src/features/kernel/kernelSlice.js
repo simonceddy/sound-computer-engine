@@ -22,6 +22,7 @@ export const kernelSlice = createSlice({
     mode: modes.EDIT,
     isPlaying: false,
     displayMode: displayModes.PROJ,
+    error: null,
   },
   reducers: {
     setMode: (state, action) => {
@@ -37,7 +38,13 @@ export const kernelSlice = createSlice({
     },
     setBooted: (state) => {
       state.booted = true;
-    }
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
 });
 
@@ -45,7 +52,9 @@ export const {
   setMode,
   togglePlay,
   setDisplayMode,
-  setBooted
+  setBooted,
+  setError,
+  clearError
 } = kernelSlice.actions;
 
 export default kernelSlice.reducer;

@@ -1,7 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadProjects } from '../../util/storage';
+import { load, loadProjects } from '../../util/storage';
+import { displayModes, setDisplayMode } from '../kernel/kernelSlice';
+import { setNotification } from '../notifications/notificationsSlice';
+import { loadProject } from '../project/projectSlice';
+import { initSequencer } from '../sequencer/sequencerSlice';
 import { setSelectedProject } from './loadProjectSlice';
 
 function LoadProject() {
@@ -14,6 +18,18 @@ function LoadProject() {
       .then((data) => setProjects(Object.keys(data)))
       .catch(console.error);
   }, []);
+
+  const loadProj = () => {
+    console.log(projects[selectedProject]);
+    load(projects[selectedProject])
+      .then(({ project, sequencer }) => {
+        dispatch(loadProject(project));
+        dispatch(initSequencer(sequencer));
+        dispatch(setDisplayMode(displayModes.PROJ));
+        dispatch(setNotification('Project loaded'));
+      })
+      .catch(console.error);
+  };
   return (
     <div>
       {projects.map((name, idx) => (
@@ -25,9 +41,7 @@ function LoadProject() {
               dispatch(setSelectedProject(idx));
             }
           }}
-          onDoubleClick={() => {
-            console.log('load project into state');
-          }}
+          onDoubleClick={loadProj}
           className={`${idx === selectedProject ? 'bg-blue-700 text-orange-300' : ''} flex flex-row justify-between items-center w-full border-b ${darkMode ? 'border-orange-300' : 'border-black'}`}
         >
           {name}

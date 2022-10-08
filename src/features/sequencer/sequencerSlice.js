@@ -46,6 +46,15 @@ export const sequencerSlice = createSlice({
     resetSteps: (state) => {
       state.step = 0;
       state.steps = state.steps.map(() => 0);
+    },
+    loadSequences: (state, action) => {
+      state.loadedSequences = action.payload;
+    },
+    initSequencer: (state, action) => {
+      state.loadedSequences = action.payload.loadedSequences || state.loadedSequences;
+      state.page = action.payload.page || state.page;
+      state.step = action.payload.step || state.step;
+      state.steps = action.payload.steps || state.steps;
     }
   },
 });
@@ -56,7 +65,9 @@ export const {
   toggleStep,
   nextStep,
   initTrackSteps,
-  resetSteps
+  resetSteps,
+  loadSequences,
+  initSequencer
 } = sequencerSlice.actions;
 
 export default sequencerSlice.reducer;

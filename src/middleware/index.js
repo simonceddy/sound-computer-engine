@@ -1,8 +1,9 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
+import localforage from 'localforage';
 import { toggleDarkMode } from '../features/display/displaySlice';
-import { initTrack, setSelectedTrack } from '../features/project/projectSlice';
+import { initTrack, loadProject, setSelectedTrack } from '../features/project/projectSlice';
 import { initSequence } from '../features/sequencer/sequencerSlice';
-import { persistMetadata } from '../util/storage';
+import { persistMetadata, SCE_LAST_PROJECT_PREFIX } from '../util/storage';
 
 export const tracksListenerMiddleware = createListenerMiddleware();
 
@@ -25,4 +26,18 @@ darkModeListenerMiddleware.startListening({
   effect: async (_action, api) => {
     await persistMetadata(api.getState().display);
   }
+});
+
+const setLastProject = async (_action, api) => {
+  await localforage.setItem(
+    SCE_LAST_PROJECT_PREFIX,
+    api.getState().project.id
+  );
+};
+
+export const loadProjectListenerMiddleware = createListenerMiddleware();
+
+loadProjectListenerMiddleware.startListening({
+  actionCreator: loadProject,
+  effect: setLastProject
 });

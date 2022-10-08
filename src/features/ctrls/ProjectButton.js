@@ -1,22 +1,30 @@
+import localforage from 'localforage';
 import { useDispatch, useSelector } from 'react-redux';
 import CtrlButton from '../../components/Ctrl/CtrlButton';
-import { persist } from '../../util/storage';
+import { persist, SCE_LAST_PROJECT_PREFIX } from '../../util/storage';
 import { displayModes, setDisplayMode } from '../kernel/kernelSlice';
-import useProject from '../project/useProject';
+import { setNotification } from '../notifications/notificationsSlice';
+// import useProject from '../project/useProject';
 
 function ProjectButton() {
   const { displayMode } = useSelector((state) => state.kernel);
+  const { project, sequencer } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const project = useProject();
 
   return (
     <CtrlButton
       fnLabel="save"
       className={`active:bg-cyan-400 ${displayMode === displayModes.PROJ ? 'bg-orange-400' : 'bg-slate-400'}`}
-      onClick={(e) => {
+      onClick={async (e) => {
         if (e.shiftKey) {
           // save project
-          persist(project);
+          const saved = await persist({ project, sequencer });
+          console.log(saved);
+          await localforage.setItem(
+            SCE_LAST_PROJECT_PREFIX,
+            project.id
+          );
+          dispatch(setNotification('Project saved'));
         } else {
           dispatch(setDisplayMode(displayModes.PROJ));
         }

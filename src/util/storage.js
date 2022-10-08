@@ -2,6 +2,7 @@ import localforage from 'localforage';
 
 export const SCE_PROJECTS_PREFIX = 'se_sce_projects';
 export const SCE_METADATA_PREFIX = 'se_sce_metadata';
+export const SCE_LAST_PROJECT_PREFIX = 'se_sce_lastprojid';
 
 export async function loadProjects() {
   try {
@@ -46,9 +47,10 @@ export async function persistMetadata(state) {
   }
 }
 
-export async function load() {
+export async function load(projectId) {
   try {
-    const project = await localforage.getItem(SCE_PROJECTS_PREFIX);
+    const project = await loadProjects()
+      .then((projects) => projects[projectId] || null);
     // console.log(project);
     return project;
   } catch (e) {

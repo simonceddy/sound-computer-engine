@@ -4,8 +4,9 @@ import kernel from '../features/kernel/kernelSlice';
 import display from '../features/display/displaySlice';
 import sequencer from '../features/sequencer/sequencerSlice';
 import clock from '../features/clock/clockSlice';
-import { darkModeListenerMiddleware, tracksListenerMiddleware } from '../middleware';
+import { darkModeListenerMiddleware, loadProjectListenerMiddleware, tracksListenerMiddleware } from '../middleware';
 import loadProject from '../features/loadProject/loadProjectSlice';
+import notifications from '../features/notifications/notificationsSlice';
 
 const store = configureStore({
   reducer: {
@@ -15,9 +16,14 @@ const store = configureStore({
     sequencer,
     clock,
     loadProject,
+    notifications,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-    .prepend(tracksListenerMiddleware.middleware, darkModeListenerMiddleware.middleware),
+    .prepend(
+      tracksListenerMiddleware.middleware,
+      darkModeListenerMiddleware.middleware,
+      loadProjectListenerMiddleware.middleware,
+    ),
 });
 
 export default store;

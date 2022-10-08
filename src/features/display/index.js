@@ -2,11 +2,12 @@ import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DisplayContainer from '../../components/Display/DisplayContainer';
 import './Display.css';
-import { displayModes, modes } from '../kernel/kernelSlice';
+import { displayModes, modes, setDisplayMode } from '../kernel/kernelSlice';
 import TrackDisplayRow from '../../components/Display/TrackDisplayRow';
 import LoadProject from '../loadProject';
 import { setSelectedTrack } from '../project/projectSlice';
 import EditTrack from '../editTrack/EditTrack';
+import Notification from '../notifications/Notification';
 
 function Display() {
   const ref = useRef(null);
@@ -25,7 +26,15 @@ function Display() {
         <div ref={ref} className={`display-screen text-xs ${darkMode ? 'dark-mode' : ''}`}>
           <div className={`flex flex-row w-full border-b justify-start items-start ${darkMode ? 'border-orange-300' : 'border-black'}`}>
             <div className={`border-r px-0.5 ${darkMode ? 'border-orange-300' : 'border-black'}`}>
-              {tempo} BPM
+              {tempo.toLocaleString(
+                'en-US',
+                {
+                  minimumIntegerDigits: 2,
+                  maximumFractionDigits: 1,
+                  minimumFractionDigits: 1,
+                  useGrouping: false
+                }
+              )} BPM
             </div>
             <div className={`border-r px-0.5 ${darkMode ? 'border-orange-300' : 'border-black'}`}>
               {mode === modes.EDIT && 'Edit Mode'}
@@ -41,6 +50,7 @@ function Display() {
               }
             )}
             </div>
+            <Notification />
           </div>
           <div className="flex-1 w-full overflow-y-scroll whitespace-nowrap p-0.5">
             {displayMode === displayModes.PROJ && (
@@ -55,6 +65,12 @@ function Display() {
                     if (idx !== selectedTrackId) {
                       dispatch(setSelectedTrack(idx));
                     }
+                  }}
+                  onDoubleClick={() => {
+                    if (idx !== selectedTrackId) {
+                      dispatch(setSelectedTrack(idx));
+                    }
+                    dispatch(setDisplayMode(displayModes.EDIT_TRACK));
                   }}
                   darkMode={darkMode}
                   key={`track-${idx}-info`}

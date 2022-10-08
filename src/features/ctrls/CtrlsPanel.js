@@ -3,7 +3,8 @@ import CtrlButton from '../../components/Ctrl/CtrlButton';
 import ctrlsList from './ctrlsList';
 import './CtrlsPanel.css';
 
-function CtrlsPanel() {
+function CtrlsPanel({ kernel }) {
+  console.log(kernel);
   const dispatch = useDispatch();
   return (
     <div className="ctrls-panel flex flex-row justify-around items-center flex-wrap">
@@ -21,8 +22,8 @@ function CtrlsPanel() {
             onClick={(e) => {
             // console.log(e);
               if (e.shiftKey && fnAction) {
-                fnAction(dispatch);
-              } else if (action) action(dispatch);
+                fnAction(dispatch, kernel);
+              } else if (action) action(dispatch, kernel);
             }}
           >
             {content}
