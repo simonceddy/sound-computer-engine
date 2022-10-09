@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DisplayContainer from '../../components/Display/DisplayContainer';
@@ -8,6 +9,7 @@ import LoadProject from '../loadProject';
 import { setSelectedTrack } from '../project/projectSlice';
 import EditTrack from '../editTrack/EditTrack';
 import Notification from '../notifications/Notification';
+import Mixer from '../mixer/Mixer';
 
 function Display() {
   const ref = useRef(null);
@@ -36,11 +38,13 @@ function Display() {
                 }
               )} BPM
             </div>
-            <div className={`border-r px-0.5 ${darkMode ? 'border-orange-300' : 'border-black'}`}>
+            {/* <div
+              className={`border-r px-0.5 ${darkMode ? 'border-orange-300' : 'border-black'}`}
+            >
               {mode === modes.EDIT && 'Edit Mode'}
               {mode === modes.PERF && 'Perf Mode'}
               {mode === modes.KEYS && 'Keys Mode'}
-            </div>
+            </div> */}
             <div className={`border-r px-0.5 ${darkMode ? 'border-orange-300' : 'border-black'}`}>
               Track {(selectedTrackId + 1).toLocaleString(
               'en-US',
@@ -86,6 +90,9 @@ function Display() {
             )}
             {displayMode === displayModes.EDIT_TRACK && (
               <EditTrack />
+            )}
+            {displayMode === displayModes.MIXER && (
+              <Mixer />
             )}
           </div>
           {}

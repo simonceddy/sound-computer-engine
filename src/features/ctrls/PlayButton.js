@@ -6,7 +6,6 @@ import { togglePlay } from '../kernel/kernelSlice';
 function PlayButton() {
   const { isPlaying } = useSelector((state) => state.kernel);
   const dispatch = useDispatch();
-  // console.log(clock);
   const handleClick = () => {
     dispatch(togglePlay());
   };

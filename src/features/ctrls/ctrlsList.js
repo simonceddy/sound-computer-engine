@@ -1,8 +1,8 @@
-import { toggleDarkMode } from '../display/displaySlice';
 import { displayModes, setDisplayMode } from '../kernel/kernelSlice';
 import { resetSteps } from '../sequencer/sequencerSlice';
 import EditModeButton from './EditModeButton';
-import PerfModeButton from './PerfModeButton';
+import MixerButton from './MixerButton';
+import PadModeButton from './PadModeButton';
 import PlayButton from './PlayButton';
 import ProjectButton from './ProjectButton';
 
@@ -13,16 +13,11 @@ const ctrlsList = [
   },
   {
     id: 'second',
-    Component: PerfModeButton
+    Component: PadModeButton
   },
   {
-    fnLabel: 'DARK',
-    id: 'third',
-    action: () => {},
-    fnAction: (dispatch) => {
-      console.log('toggle dark mode');
-      dispatch(toggleDarkMode());
-    }
+    id: 'mixer-button',
+    Component: MixerButton
   },
   {
     id: 'show-project',

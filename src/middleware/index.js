@@ -5,6 +5,8 @@ import { initTrack, loadProject, setSelectedTrack } from '../features/project/pr
 import { initSequence } from '../features/sequencer/sequencerSlice';
 import { persistMetadata, SCE_LAST_PROJECT_PREFIX } from '../util/storage';
 
+export { default as eventEmitterMiddleware } from './eventEmitterMiddleware';
+
 export const tracksListenerMiddleware = createListenerMiddleware();
 
 tracksListenerMiddleware.startListening({

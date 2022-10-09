@@ -6,6 +6,8 @@ audioContext.addEventListener('play', () => {
 });
 
 const kernel = new EventEmiiter();
+kernel.on('play', () => console.log('play'));
+console.log(kernel.eventNames());
 
 kernel.audioContext = audioContext;
 

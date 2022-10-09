@@ -5,14 +5,14 @@ import {
 } from '../kernel/kernelSlice';
 
 function EditModeButton() {
-  const { mode } = useSelector((state) => state.kernel);
+  const { displayMode } = useSelector((state) => state.kernel);
   const dispatch = useDispatch();
   return (
     <CtrlButton
       label="Edit"
-      className={`active:bg-cyan-400 ${mode === modes.EDIT ? 'bg-orange-400' : 'bg-slate-400'}`}
+      className={`active:bg-cyan-400 ${displayMode === displayModes.EDIT_TRACK ? 'bg-orange-400' : 'bg-slate-400'}`}
       onClick={() => {
-        if (mode !== modes.EDIT) {
+        if (displayMode !== displayModes.EDIT_TRACK) {
           dispatch(setDisplayMode(displayModes.EDIT_TRACK));
           dispatch(setMode(modes.EDIT));
         }

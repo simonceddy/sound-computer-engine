@@ -23,15 +23,15 @@ function Kernel() {
   //   // console.log(kernel);
   // }, [isBooted]);
 
-  const { loaded, instance, error } = useWasm('my-wasm.wasm');
-  // console.log(error, instance, error);
-  useEffect(() => {
-    if (loaded) {
-      console.log(instance);
-      console.log(instance.exports.addString('bonus', 'wemby'));
-    }
-  }, [loaded]);
-
+  // const { loaded, instance, error } = useWasm('firmware.wasm', { kernel });
+  // console.log(error);
+  // useEffect(() => {
+  //   if (loaded) {
+  //     console.log(instance);
+  //     console.log(instance.exports.addString('bonus', 'wemby'));
+  //   }
+  // }, [loaded]);
+  // console.log('here');
   if (!window.AudioContext) return (<div>Your browser does not support WebAudio</div>);
   return (
     <Bootloader>
@@ -41,7 +41,11 @@ function Kernel() {
             <div className="flex flex-col items-center justify-around">
               <div className="flex flex-row justify-between items-center w-full">
                 <Logo />
-                <MicroSDSlot />
+                <MicroSDSlot
+                  onClick={() => {
+                    console.log('load samples!');
+                  }}
+                />
               </div>
               <ClockQuickCtrl />
               <Pads />

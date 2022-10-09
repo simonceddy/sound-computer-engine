@@ -30,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "tailwind": "tailwind build -i src/styles/tailwind.src.css -o src/styles/tailwind.css",
-    "wasm": "asc assembly/index.ts --exportRuntime --transform as-bind -b public/my-wasm.wasm --optimize",
+    "wasm": "asc assembly/index.ts --exportRuntime --transform as-bind -b public/firmware.wasm --optimize",
     "dev": "npm run wasm && npm run start",
     "build:all": "npm run wasm && npm run build"
   },

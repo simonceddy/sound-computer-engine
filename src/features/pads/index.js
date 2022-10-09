@@ -14,13 +14,13 @@ function Pads() {
   const { selectedTrackId } = useSelector((state) => state.project);
   const { mode, displayMode } = useSelector((state) => state.kernel);
   const dispatch = useDispatch();
-
+  // console.log(mode);
   return (
     <PadsContainer>
       {padKeys.map((_v, idx) => (
         <PadButton
           onClick={(e) => {
-            if ((mode === modes.EDIT || e.shiftKey)) {
+            if (mode === modes.EDIT || e.shiftKey) {
               if (selectedTrackId !== idx) {
                 dispatch(setSelectedTrack(idx));
               } else if (displayMode !== displayModes.EDIT_TRACK) {

@@ -4,7 +4,12 @@ import kernel from '../features/kernel/kernelSlice';
 import display from '../features/display/displaySlice';
 import sequencer from '../features/sequencer/sequencerSlice';
 import clock from '../features/clock/clockSlice';
-import { darkModeListenerMiddleware, loadProjectListenerMiddleware, tracksListenerMiddleware } from '../middleware';
+import {
+  darkModeListenerMiddleware,
+  // eventEmitterMiddleware,
+  loadProjectListenerMiddleware,
+  tracksListenerMiddleware
+} from '../middleware';
 import loadProject from '../features/loadProject/loadProjectSlice';
 import notifications from '../features/notifications/notificationsSlice';
 
@@ -23,6 +28,7 @@ const store = configureStore({
       tracksListenerMiddleware.middleware,
       darkModeListenerMiddleware.middleware,
       loadProjectListenerMiddleware.middleware,
+      // eventEmitterMiddleware.middleware,
     ),
 });
 

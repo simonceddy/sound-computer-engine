@@ -4,7 +4,7 @@ import ctrlsList from './ctrlsList';
 import './CtrlsPanel.css';
 
 function CtrlsPanel({ kernel }) {
-  console.log(kernel);
+  // console.log(kernel);
   const dispatch = useDispatch();
   return (
     <div className="ctrls-panel flex flex-row justify-around items-center flex-wrap">
@@ -12,7 +12,7 @@ function CtrlsPanel({ kernel }) {
         id, action, fnAction, Component, label, fnLabel, content
       }, idx) => (
         Component ? (
-          <Component key={`ctrl-button-${id || idx}`} />
+          <Component key={`ctrl-button-${id || idx}`} kernel={kernel} />
         ) : (
           <CtrlButton
             label={label}

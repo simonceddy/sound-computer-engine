@@ -6,13 +6,15 @@ worker.onmessage = (m) => console.log(m.data);
 export const modes = {
   EDIT: 0,
   PERF: 1,
-  KEYS: 2
+  KEYS: 2,
+  MIX: 3,
 };
 
 export const displayModes = {
   PROJ: 1,
   LOADPROJ: 2,
   EDIT_TRACK: 3,
+  MIXER: 4,
 };
 
 export const kernelSlice = createSlice({
