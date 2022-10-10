@@ -1,9 +1,10 @@
-import { useCallback } from 'react';
+import { forwardRef, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CtrlButton from '../../components/Ctrl/CtrlButton';
 import { togglePlay } from '../kernel/kernelSlice';
+import icon from '../../resources/play-icon.svg';
 
-function PlayButton() {
+const PlayButton = forwardRef((_props, ref) => {
   const { isPlaying } = useSelector((state) => state.kernel);
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -11,7 +12,8 @@ function PlayButton() {
   };
   const PlayComp = useCallback(() => (
     <CtrlButton
-      className={`active:bg-cyan-400 ${isPlaying ? 'bg-green-400' : 'bg-slate-400'}`}
+      ref={ref}
+      className={`active:bg-cyan-400 ${isPlaying ? 'bg-green-400' : 'bg-slate-400'} flex flex-col justify-center items-center`}
       onClick={(e) => {
         if (e.shiftKey) {
           // save project
@@ -20,12 +22,12 @@ function PlayButton() {
         }
       }}
     >
-      ᐅ
+      <img src={icon} alt="" width="20px" height="20px" />
     </CtrlButton>
   ), [isPlaying]);
   return (
     <PlayComp />
   );
-}
+});
 
 export default PlayButton;

@@ -15,6 +15,8 @@ export const displayModes = {
   LOADPROJ: 2,
   EDIT_TRACK: 3,
   MIXER: 4,
+  EDIT_STEP: 5,
+  MIXER_CHANNEL: 6,
 };
 
 export const kernelSlice = createSlice({

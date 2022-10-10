@@ -18,11 +18,11 @@
 
 .display-screen.dark-mode {
   background: black;
-  color: lightcoral;
+  color: rgb(251,146,60);
 }
 
 
 .display-loading-screen {
   background-color: black;
-  color: orangered;
+  color: rgb(251,146,60);
 }

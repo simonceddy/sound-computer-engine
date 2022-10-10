@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CtrlButton from '../../components/Ctrl/CtrlButton';
 import { modes, setMode } from '../kernel/kernelSlice';
@@ -21,7 +21,7 @@ function getBgCss(toggledMode = 0) {
 }
 const maxMode = modeToggles.length - 1;
 
-function PadModeButton() {
+const PadModeButton = forwardRef((_props, ref) => {
   const { mode } = useSelector((state) => state.kernel);
   const getToggleMode = () => modeToggles.findIndex((v) => v === mode);
   const [toggledMode, setToggledMode] = useState(getToggleMode() || 0);
@@ -32,6 +32,7 @@ function PadModeButton() {
   }, [toggledMode]);
   return (
     <CtrlButton
+      ref={ref}
       label="pads"
       fnLabel=""
       className={`active:bg-cyan-400 ${getBgCss(toggledMode)}`}
@@ -44,6 +45,6 @@ function PadModeButton() {
       }}
     />
   );
-}
+});
 
 export default PadModeButton;

@@ -1,10 +1,14 @@
-import { displayModes, setDisplayMode } from '../kernel/kernelSlice';
-import { resetSteps } from '../sequencer/sequencerSlice';
+// import { displayModes, setDisplayMode } from '../kernel/kernelSlice';
+import DownButton from './DownButton';
 import EditModeButton from './EditModeButton';
+import LeftButton from './LeftButton';
 import MixerButton from './MixerButton';
 import PadModeButton from './PadModeButton';
 import PlayButton from './PlayButton';
 import ProjectButton from './ProjectButton';
+import ResetSeqButton from './ResetSeqButton';
+import RightButton from './RightButton';
+import UpButton from './UpButton';
 
 const ctrlsList = [
   {
@@ -24,21 +28,21 @@ const ctrlsList = [
     Component: ProjectButton
   },
   {
-    fnLabel: 'load',
-    content: '↑',
-    fnAction: (dispatch) => {
-      dispatch(setDisplayMode(displayModes.LOADPROJ));
-    }
+    id: 'up-button',
+    Component: UpButton,
   },
   {},
   {
-    content: '←'
+    id: 'left-button',
+    Component: LeftButton,
   },
   {
-    content: '↓'
+    id: 'down-button',
+    Component: DownButton,
   },
   {
-    content: '→'
+    id: 'right-button',
+    Component: RightButton,
   },
   {
     id: 'play-button',
@@ -46,7 +50,7 @@ const ctrlsList = [
   },
   {
     id: 'restart-button',
-    action: (dispatch) => dispatch(resetSteps())
+    Component: ResetSeqButton
   }
 ];
 

@@ -7,9 +7,9 @@ function TrackDisplayRow({
       role="presentation"
       onClick={onClick}
       onDoubleClick={onDoubleClick}
-      className={`${selected ? 'bg-blue-700 text-orange-300' : ''} flex flex-row justify-between items-center w-full border-b ${darkMode ? 'border-orange-300' : 'border-black'}`}
+      className={`${selected ? 'bg-blue-700 text-orange-400' : ''} flex flex-row justify-between items-center w-full border-b ${darkMode ? 'border-orange-400' : 'border-black'}`}
     >
-      <span className={`mr-1 pr-1 border-r ${darkMode ? 'border-orange-300' : 'border-black'}`}>
+      <span className={`mr-1 pr-1 border-r ${darkMode ? 'border-orange-400' : 'border-black'}`}>
         {(index + 1).toLocaleString(
           'en-US',
           {
@@ -18,7 +18,7 @@ function TrackDisplayRow({
           }
         )}. {track.name}
       </span>
-      <span className={`mr-1 pr-1 border-r ${darkMode ? 'border-orange-300' : 'border-black'}`}>
+      <span className={`mr-1 pr-1 border-r ${darkMode ? 'border-orange-400' : 'border-black'}`}>
         {track.clockMult.toLocaleString(
           'en-US',
           {

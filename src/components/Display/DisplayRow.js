@@ -3,7 +3,7 @@ function DisplayRow({
 }) {
   return (
     <div
-      className={`border-b px-0.5 ${darkMode ? 'border-orange-300' : 'border-black'} ${selected ? 'bg-blue-900 text-orange-300' : ''}`}
+      className={`border-b px-0.5 ${darkMode ? 'border-orange-400' : 'border-black'} ${selected ? 'bg-blue-900 text-orange-400' : ''}`}
       style={{ marginBottom: '2px' }}
       role="presentation"
       onClick={onClick}

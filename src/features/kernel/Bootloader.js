@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import localforage from 'localforage';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { load, loadMetadata, SCE_LAST_PROJECT_PREFIX } from '../../util/storage';
 import { initDisplay } from '../display/displaySlice';
 import { setNotification } from '../notifications/notificationsSlice';
@@ -17,6 +17,7 @@ function getDarkMode() {
 
 function Bootloader({ children }) {
   const dispatch = useDispatch();
+  const { booted } = useSelector((state) => state.kernel);
   // const getStep = useStep();
   /* (key) => {
     if (key === 'project') {
@@ -31,7 +32,7 @@ function Bootloader({ children }) {
 
   useEffect(() => {
     let init = false;
-    if (!init) {
+    if (!init && !booted) {
       getDarkMode()
         .then((data) => {
           if (data) dispatch(initDisplay(data));

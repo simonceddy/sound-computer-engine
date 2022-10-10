@@ -10,6 +10,7 @@ import { setSelectedTrack } from '../project/projectSlice';
 import EditTrack from '../editTrack/EditTrack';
 import Notification from '../notifications/Notification';
 import Mixer from '../mixer/Mixer';
+import EditStep from '../step/EditStep';
 
 function Display() {
   const ref = useRef(null);
@@ -26,8 +27,8 @@ function Display() {
       {booted ? (
 
         <div ref={ref} className={`display-screen text-xs ${darkMode ? 'dark-mode' : ''}`}>
-          <div className={`flex flex-row w-full border-b justify-start items-start ${darkMode ? 'border-orange-300' : 'border-black'}`}>
-            <div className={`border-r px-0.5 ${darkMode ? 'border-orange-300' : 'border-black'}`}>
+          <div className={`flex flex-row w-full border-b justify-start items-start ${darkMode ? 'border-orange-400' : 'border-black'}`}>
+            <div className={`border-r px-0.5 ${darkMode ? 'border-orange-400' : 'border-black'}`}>
               {tempo.toLocaleString(
                 'en-US',
                 {
@@ -39,13 +40,13 @@ function Display() {
               )} BPM
             </div>
             {/* <div
-              className={`border-r px-0.5 ${darkMode ? 'border-orange-300' : 'border-black'}`}
+              className={`border-r px-0.5 ${darkMode ? 'border-orange-400' : 'border-black'}`}
             >
               {mode === modes.EDIT && 'Edit Mode'}
               {mode === modes.PERF && 'Perf Mode'}
               {mode === modes.KEYS && 'Keys Mode'}
             </div> */}
-            <div className={`border-r px-0.5 ${darkMode ? 'border-orange-300' : 'border-black'}`}>
+            <div className={`border-r px-0.5 ${darkMode ? 'border-orange-400' : 'border-black'}`}>
               Track {(selectedTrackId + 1).toLocaleString(
               'en-US',
               {
@@ -85,15 +86,10 @@ function Display() {
               ))}
             </div>
             )}
-            {displayMode === displayModes.LOADPROJ && (
-            <LoadProject />
-            )}
-            {displayMode === displayModes.EDIT_TRACK && (
-              <EditTrack />
-            )}
-            {displayMode === displayModes.MIXER && (
-              <Mixer />
-            )}
+            {displayMode === displayModes.LOADPROJ && (<LoadProject />)}
+            {displayMode === displayModes.EDIT_TRACK && (<EditTrack />)}
+            {displayMode === displayModes.MIXER && (<Mixer />)}
+            {displayMode === displayModes.EDIT_STEP && (<EditStep />)}
           </div>
           {}
         </div>

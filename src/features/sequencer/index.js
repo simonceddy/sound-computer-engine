@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SequencerContainer from '../../components/Sequencer/SequencerContainer';
 import SequencerStepButton from '../../components/Sequencer/SequencerStepButton';
+import { displayModes, setDisplayMode } from '../kernel/kernelSlice';
+import { setSelectedStep } from '../step/editStepSlice';
 import { initSequence, toggleStep } from './sequencerSlice';
 
 const emptySeqPage = [];
@@ -30,11 +32,17 @@ function Sequencer() {
     <SequencerContainer>
       {emptySeqPage.map((_v, idx) => (
         <SequencerStepButton
-          onClick={() => {
-            dispatch(toggleStep({
-              id: selectedTrackId,
-              step: idx
-            }));
+          onClick={(e) => {
+            if (e.shiftKey) {
+              console.log('shift track');
+              dispatch(setSelectedStep(idx));
+              dispatch(setDisplayMode(displayModes.EDIT_STEP));
+            } else {
+              dispatch(toggleStep({
+                id: selectedTrackId,
+                step: idx
+              }));
+            }
           }}
           currentStep={(steps[selectedTrackId]
             && steps[selectedTrackId] === idx)

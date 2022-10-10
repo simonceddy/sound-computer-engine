@@ -6,11 +6,13 @@ const CtrlButton = forwardRef(({
   onClick,
   className,
   label = '',
-  fnLabel = ''
+  fnLabel = '',
+  onKeyDown
 }, ref) => (
   <div className="ctrl-button-box flex flex-col justify-center items-center">
     <span className="ctrl-button-label uppercase text-center fn-label">{fnLabel}</span>
     <button
+      onKeyDown={onKeyDown}
       ref={ref}
       onClick={onClick}
       type="button"

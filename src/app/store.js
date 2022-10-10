@@ -12,6 +12,8 @@ import {
 } from '../middleware';
 import loadProject from '../features/loadProject/loadProjectSlice';
 import notifications from '../features/notifications/notificationsSlice';
+import editStep from '../features/step/editStepSlice';
+import editTrack from '../features/editTrack/editTrackSlice';
 
 const store = configureStore({
   reducer: {
@@ -22,6 +24,8 @@ const store = configureStore({
     clock,
     loadProject,
     notifications,
+    editStep,
+    editTrack
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .prepend(
