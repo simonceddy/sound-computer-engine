@@ -1,3 +1,4 @@
+import { engines } from '../engines';
 import step from '../step';
 
 const track = {
@@ -5,6 +6,8 @@ const track = {
   startAt: 0,
   seqLength: 16,
   clockMult: 1,
+  engine: engines.SAMPLE_ENGINE,
+  engineSettings: {}
   // sequence: []
 };
 

@@ -11,12 +11,17 @@ export const modes = {
 };
 
 export const displayModes = {
+  HOME: 0,
   PROJ: 1,
   LOADPROJ: 2,
   EDIT_TRACK: 3,
   MIXER: 4,
   EDIT_STEP: 5,
   MIXER_CHANNEL: 6,
+  ENGINE: 7,
+  EFFECTS: 8,
+  MODULATION: 9,
+  ROUTING: 10,
 };
 
 export const kernelSlice = createSlice({

@@ -15,11 +15,11 @@ function keyHandler(mode, dir, dispatch) {
     case displayModes.PROJ:
       return ({ selectedTrackId }) => {
         // console.log(dir);
-        if (dir === 'down') {
+        if (dir === 'down' || dir === 'right') {
           dispatch(setSelectedTrack(
             selectedTrackId >= 15 ? 0 : selectedTrackId + 1
           ));
-        } else if (dir === 'up') {
+        } else if (dir === 'up' || dir === 'left') {
           dispatch(setSelectedTrack(
             selectedTrackId <= 0 ? 15 : selectedTrackId - 1
           ));

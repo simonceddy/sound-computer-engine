@@ -1,32 +1,65 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DisplayRow from '../../components/Display/DisplayRow';
+import SelectTrackEngine from '../../components/SelectTrackEngine';
+import { useSelectedTrack } from '../../hooks';
+import { engines } from '../engines';
+import { displayModes, setDisplayMode } from '../kernel/kernelSlice';
+import { updateTrack } from '../project/projectSlice';
+import { setSelectedParam } from './editTrackSlice';
+
+const engineKeys = Object.keys(engines);
 
 function EditTrack() {
-  const [editingParam, setEditingParam] = useState('name');
-  const { tracks, selectedTrackId } = useSelector((state) => state.project);
+  const { selectedParam } = useSelector((state) => state.editTrack);
+  const { selectedTrackId } = useSelector((state) => state.project);
+  const track = useSelectedTrack();
   const { darkMode } = useSelector((state) => state.display);
-
-  console.log(tracks[selectedTrackId]);
+  const dispatch = useDispatch();
+  console.log(track);
   return (
     <div>
       <DisplayRow
-        selected={editingParam === 'name'}
+        selected={selectedParam === 'name'}
         darkMode={darkMode}
         onClick={() => {
-          if (editingParam !== 'name') setEditingParam('name');
+          if (selectedParam !== 'name') dispatch(setSelectedParam('name'));
         }}
       >
-        {tracks[selectedTrackId].name}
+        {track.name}
       </DisplayRow>
       <DisplayRow
-        selected={editingParam === 'clockMult'}
+        selected={selectedParam === 'clockMult'}
         darkMode={darkMode}
         onClick={() => {
-          if (editingParam !== 'clockMult') setEditingParam('clockMult');
+          if (selectedParam !== 'clockMult') dispatch(setSelectedParam('clockMult'));
         }}
       >
-        Clock multiplier: {tracks[selectedTrackId].clockMult || 1}
+        Clock multiplier: {track.clockMult || 1}
+      </DisplayRow>
+      <DisplayRow
+        selected={selectedParam === 'engine'}
+        darkMode={darkMode}
+        onDoubleClick={() => {
+          dispatch(setDisplayMode(displayModes.ENGINE));
+        }}
+        onClick={() => {
+          if (selectedParam !== 'engine') dispatch(setSelectedParam('engine'));
+        }}
+      >
+        Engine: {selectedParam === 'engine' ? (
+          <SelectTrackEngine
+            value={track.engine || 0}
+            onChange={(e) => {
+              const newEngine = Number(e.target.value);
+              dispatch(updateTrack({
+                id: selectedTrackId,
+                data: {
+                  engine: newEngine
+                }
+              }));
+            }}
+          />
+      ) : engineKeys[track.engine || 0]}
       </DisplayRow>
       {}
     </div>

@@ -8,8 +8,8 @@ onmessage = (m) => {
     interval1 = setInterval(() => {
       postMessage('tick');
     }, 5);
-  } else if (interval !== 0) {
-    clearInterval(interval);
+  } else if (interval1 !== 0) {
+    clearInterval(interval1);
     interval1 = 0;
   }
 };

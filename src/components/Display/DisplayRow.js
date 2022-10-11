@@ -1,5 +1,5 @@
 function DisplayRow({
-  children, darkMode, selected, onClick
+  children, darkMode, selected, onClick, onDoubleClick
 }) {
   return (
     <div
@@ -7,6 +7,7 @@ function DisplayRow({
       style={{ marginBottom: '2px' }}
       role="presentation"
       onClick={onClick}
+      onDoubleClick={onDoubleClick}
     >
       {children}
     </div>

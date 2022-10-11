@@ -14,3 +14,11 @@
 .seq-step-button.seq-current-step {
   border: solid 2px rgb(97, 213, 255);
 }
+
+.seq-step-button.seq-selected-step {
+  border: solid 2px rgb(237, 97, 255);
+}
+
+.seq-step-button.seq-current-step.seq-selected-step {
+  border: solid 2px rgb(254, 189, 78);
+}

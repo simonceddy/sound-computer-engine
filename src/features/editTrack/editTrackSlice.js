@@ -1,9 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export const editTrackParams = [
+  'name',
+  'clockMult',
+  'engine'
+];
+
 export const editTrackSlice = createSlice({
   name: 'editTrack',
   initialState: {
-    selectedParam: 0
+    selectedParam: editTrackParams[0]
   },
   reducers: {
     setSelectedParam: (state, action) => {

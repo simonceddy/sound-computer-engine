@@ -11,6 +11,7 @@ import EditTrack from '../editTrack/EditTrack';
 import Notification from '../notifications/Notification';
 import Mixer from '../mixer/Mixer';
 import EditStep from '../step/EditStep';
+import EditEngine from '../engines/EditEngine';
 
 function Display() {
   const ref = useRef(null);
@@ -90,6 +91,7 @@ function Display() {
             {displayMode === displayModes.EDIT_TRACK && (<EditTrack />)}
             {displayMode === displayModes.MIXER && (<Mixer />)}
             {displayMode === displayModes.EDIT_STEP && (<EditStep />)}
+            {displayMode === displayModes.ENGINE && (<EditEngine />)}
           </div>
           {}
         </div>

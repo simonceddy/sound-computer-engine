@@ -5,6 +5,17 @@ import {
   displayModes, modes, setDisplayMode, setMode
 } from '../kernel/kernelSlice';
 
+function getButtonBg(mode) {
+  switch (mode) {
+    case displayModes.EDIT_TRACK:
+      return 'bg-orange-400';
+    case displayModes.ENGINE:
+      return 'bg-purple-400';
+    default:
+      return 'bg-slate-400';
+  }
+}
+
 const EditModeButton = forwardRef((_props, ref) => {
   const { displayMode } = useSelector((state) => state.kernel);
   const dispatch = useDispatch();
@@ -12,9 +23,11 @@ const EditModeButton = forwardRef((_props, ref) => {
     <CtrlButton
       ref={ref}
       label="Edit"
-      className={`active:bg-cyan-400 ${displayMode === displayModes.EDIT_TRACK ? 'bg-orange-400' : 'bg-slate-400'}`}
-      onClick={() => {
-        if (displayMode !== displayModes.EDIT_TRACK) {
+      className={`active:bg-cyan-400 ${getButtonBg(displayMode)}`}
+      onClick={(e) => {
+        if (e.shiftKey && displayMode !== displayModes.ENGINE) {
+          dispatch(setDisplayMode(displayModes.ENGINE));
+        } else if (displayMode !== displayModes.EDIT_TRACK) {
           dispatch(setDisplayMode(displayModes.EDIT_TRACK));
           dispatch(setMode(modes.EDIT));
         }

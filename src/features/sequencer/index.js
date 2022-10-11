@@ -15,6 +15,8 @@ for (let i = 0; i < 16; i++) {
 function Sequencer() {
   const { selectedTrackId } = useSelector((state) => state.project);
   const { loadedSequences, steps, step } = useSelector((state) => state.sequencer);
+  const { displayMode } = useSelector((state) => state.kernel);
+  const { selectedStep } = useSelector((state) => state.editStep);
   const dispatch = useDispatch();
   useEffect(() => {
     let loaded = false;
@@ -44,6 +46,7 @@ function Sequencer() {
               }));
             }
           }}
+          selectedStep={(displayMode === displayModes.EDIT_STEP && selectedStep === idx)}
           currentStep={(steps[selectedTrackId]
             && steps[selectedTrackId] === idx)
           || (!steps[selectedTrackId] && step === idx)}
