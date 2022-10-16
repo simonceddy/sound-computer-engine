@@ -33,7 +33,7 @@ const PadModeButton = forwardRef((_props, ref) => {
   return (
     <CtrlButton
       ref={ref}
-      label="pads"
+      label="pad md"
       fnLabel=""
       className={`active:bg-cyan-400 ${getBgCss(toggledMode)}`}
       onClick={(e) => {

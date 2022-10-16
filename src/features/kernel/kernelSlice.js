@@ -22,6 +22,7 @@ export const displayModes = {
   EFFECTS: 8,
   MODULATION: 9,
   ROUTING: 10,
+  MASTER_CHANNEL: 11,
 };
 
 export const kernelSlice = createSlice({

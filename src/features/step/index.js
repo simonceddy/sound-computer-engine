@@ -1,6 +1,7 @@
 const step = {
   prob: 100,
-  active: false
+  active: false,
+  envelope: null
 };
 
 export default step;

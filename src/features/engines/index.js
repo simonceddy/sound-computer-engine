@@ -7,3 +7,5 @@ export const engines = {
   MOD_ENGINE: 2,
   MIDI_ENGINE: 3,
 };
+
+export const engineKeys = Object.keys(engines);

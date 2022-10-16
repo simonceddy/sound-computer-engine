@@ -12,6 +12,9 @@ import Notification from '../notifications/Notification';
 import Mixer from '../mixer/Mixer';
 import EditStep from '../step/EditStep';
 import EditEngine from '../engines/EditEngine';
+import MasterChannel from '../mixer/MasterChannel';
+import TrackChannel from '../../components/Mixer/TrackChannel';
+import ErrorBoundary from '../../components/ErrorBoundary';
 
 function Display() {
   const ref = useRef(null);
@@ -21,8 +24,8 @@ function Display() {
     tempo, selectedTrackId, tracks, id
   } = useSelector((state) => state.project);
   const { loadedSequences } = useSelector((state) => state.sequencer);
-  // console.log(tracks);
   const dispatch = useDispatch();
+
   return (
     <DisplayContainer>
       {booted ? (
@@ -59,39 +62,43 @@ function Display() {
             <Notification />
           </div>
           <div className="flex-1 w-full overflow-y-scroll whitespace-nowrap p-0.5">
-            {displayMode === displayModes.PROJ && (
-            <div className="flex flex-col justify-start items-start">
-              <div className="text-lg" style={{ marginBottom: '2px' }}>
-                {id}
+            <ErrorBoundary>
+              {displayMode === displayModes.PROJ && (
+              <div className="flex flex-col justify-start items-start">
+                <div className="text-lg" style={{ marginBottom: '2px' }}>
+                  {id}
+                </div>
+                {tracks.map((track, idx) => (
+                  <TrackDisplayRow
+                    selected={idx === selectedTrackId}
+                    onClick={() => {
+                      if (idx !== selectedTrackId) {
+                        dispatch(setSelectedTrack(idx));
+                      }
+                    }}
+                    onDoubleClick={() => {
+                      if (idx !== selectedTrackId) {
+                        dispatch(setSelectedTrack(idx));
+                      }
+                      dispatch(setDisplayMode(displayModes.EDIT_TRACK));
+                    }}
+                    darkMode={darkMode}
+                    key={`track-${idx}-info`}
+                    index={idx}
+                    track={track}
+                    sequence={loadedSequences[idx] || null}
+                  />
+                ))}
               </div>
-              {tracks.map((track, idx) => (
-                <TrackDisplayRow
-                  selected={idx === selectedTrackId}
-                  onClick={() => {
-                    if (idx !== selectedTrackId) {
-                      dispatch(setSelectedTrack(idx));
-                    }
-                  }}
-                  onDoubleClick={() => {
-                    if (idx !== selectedTrackId) {
-                      dispatch(setSelectedTrack(idx));
-                    }
-                    dispatch(setDisplayMode(displayModes.EDIT_TRACK));
-                  }}
-                  darkMode={darkMode}
-                  key={`track-${idx}-info`}
-                  index={idx}
-                  track={track}
-                  sequence={loadedSequences[idx] || null}
-                />
-              ))}
-            </div>
-            )}
-            {displayMode === displayModes.LOADPROJ && (<LoadProject />)}
-            {displayMode === displayModes.EDIT_TRACK && (<EditTrack />)}
-            {displayMode === displayModes.MIXER && (<Mixer />)}
-            {displayMode === displayModes.EDIT_STEP && (<EditStep />)}
-            {displayMode === displayModes.ENGINE && (<EditEngine />)}
+              )}
+              {displayMode === displayModes.LOADPROJ && (<LoadProject />)}
+              {displayMode === displayModes.EDIT_TRACK && (<EditTrack />)}
+              {displayMode === displayModes.MIXER && (<Mixer />)}
+              {displayMode === displayModes.MASTER_CHANNEL && (<MasterChannel />)}
+              {displayMode === displayModes.EDIT_STEP && (<EditStep />)}
+              {displayMode === displayModes.ENGINE && (<EditEngine />)}
+              {displayMode === displayModes.MIXER_CHANNEL && (<TrackChannel />)}
+            </ErrorBoundary>
           </div>
           {}
         </div>

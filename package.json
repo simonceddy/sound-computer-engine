@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "as-bind": "^0.8.2",
+    "fastidious-envelope-generator": "https://github.com/simonceddy/fastidious-envelope-generator.git",
     "jzz": "^1.5.2",
     "jzz-midi-gear": "^1.2.5",
     "jzz-midi-smf": "^1.6.9",
@@ -23,7 +24,8 @@
     "tailwindcss": "^3.1.8",
     "tone": "^14.7.77",
     "waaclock": "^0.5.3",
-    "web-audio-peak-meter": "^2.1.0",
+    "web-audio-oscillators": "^1.0.4",
+    "web-audio-peak-meter": "https://github.com/simonceddy/web-audio-peak-meter.git",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -55,6 +57,7 @@
     ]
   },
   "devDependencies": {
+    "@welldone-software/why-did-you-render": "^7.0.1",
     "eslint": "^8.24.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",

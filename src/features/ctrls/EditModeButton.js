@@ -23,6 +23,7 @@ const EditModeButton = forwardRef((_props, ref) => {
     <CtrlButton
       ref={ref}
       label="Edit"
+      fnLabel="Engine"
       className={`active:bg-cyan-400 ${getButtonBg(displayMode)}`}
       onClick={(e) => {
         if (e.shiftKey && displayMode !== displayModes.ENGINE) {

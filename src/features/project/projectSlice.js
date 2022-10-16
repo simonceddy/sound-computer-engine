@@ -7,6 +7,7 @@ export const projectSlice = createSlice({
   initialState: {
     id: preloadProjectId(),
     tempo: 120,
+    tempoLock: false,
     tracks: preloadTracks(),
     selectedTrackId: 0,
     initialProject: null

@@ -1,14 +1,14 @@
 import DisplayRow from '../../components/Display/DisplayRow';
 
-function SampleEngine({ track }) {
+function MasterChannel({ children }) {
   return (
     <div>
       <DisplayRow>
-        Sample
+        Master Channel
       </DisplayRow>
-      {track.name}
+      {children}
     </div>
   );
 }
 
-export default SampleEngine;
+export default MasterChannel;

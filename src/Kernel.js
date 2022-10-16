@@ -14,9 +14,10 @@ import ClockQuickCtrl from './features/clock/ClockQuickCtrl';
 import Bootloader from './features/kernel/Bootloader';
 import useSimpleClock from './features/clock/useSimpleClock';
 import kernel from './features/kernel';
-import { useWasm } from './hooks';
+import { useAudioContext, useWasm } from './hooks';
 
 function Kernel() {
+  useAudioContext();
   useSimpleClock();
   // const { isBooted } = useSelector((state) => state.kernel);
   // useEffect(() => {

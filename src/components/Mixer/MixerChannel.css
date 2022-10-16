@@ -1,0 +1,8 @@
+.mixer-channel {
+  width: 20px;
+}
+
+.mixer-channel-peak-meter {
+  width: 20px;
+  height: 70px;
+}

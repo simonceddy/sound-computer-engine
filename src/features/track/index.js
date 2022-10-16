@@ -7,7 +7,9 @@ const track = {
   seqLength: 16,
   clockMult: 1,
   engine: engines.SAMPLE_ENGINE,
-  engineSettings: {}
+  engineSettings: {
+    envelope: null // TODO default envelope
+  }
   // sequence: []
 };
 
